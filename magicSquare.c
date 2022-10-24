@@ -31,15 +31,18 @@ int main(){
     bool found = false;
     int array2[3][3];
     int counter = 0;
+    srand(time(NULL));
 
    while (!found){
         //initialize 1d array
-        int array1[9] = {0, 0, 0, 
-                        0, 0, 0, 
-                        0, 0, 0,};
+        int array1[9];
         int random;
         int unique;
-        srand(time(NULL));
+
+        //reset array 1 to all zero
+        for (int i = 0; i < 9; i++){
+            array1[i] = 0;
+        }
         
         //gen random unique numbers
         for (int i = 0; i < 9; i++){
@@ -56,7 +59,7 @@ int main(){
             array1[i] = random;
         }
 
-        //copy prevois array into 2d array
+        //copy array1 into 2d array
         int k = 0;
         for (int i = 0; i < 3; i++){
             for (int j = 0; j < 3; j++){
@@ -65,13 +68,11 @@ int main(){
             }
         }
         //test 2d array
-        if (magicSquare(array2)){
+        if (magicSquare(array2) == true){
             found = true;
             break;
         }
-        else if (!magicSquare(array2)){
-            counter++;
-        }
+        counter++;
     }   
     //print counter
     printf("Amount of random squares created: %d\n", counter);
@@ -98,7 +99,7 @@ bool magicSquare(int array[3][3]){
     column1 = array[0][0] + array[1][0] + array[2][0];
     column2 = array[0][1] + array[1][1] + array[2][1];
     column3 = array[0][2] + array[1][2] + array[2][2];
-    //do same for diaganals
+    //do same for diagonals
     int diagonal1;
     int diagonal2;
     diagonal1 = array[0][0] + array[1][1] + array[2][2];
